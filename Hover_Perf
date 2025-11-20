@@ -1,7 +1,0 @@
-%% Hover 5-min 4000ft 95deg (ISA+20K) 
-
-% Power required (Profile + Induced)
-
-cd_rotor = 0.01;
-k_downloading = 0.1;
-k_ideal = 1.1;
