@@ -13,7 +13,7 @@ delta_ISA = 20;        % Temperature deviation [K]
 
 % XV-15 Rotor Parameters
 cd_rotor = 0.01;
-k_ideal = 1.1;
+k_ideal = 1.15;
 N_b = 3;               % blades per rotor
 omega = 59.167;         % [rad/sec]
 c = 0.3556;            % [m] chord main rotor
