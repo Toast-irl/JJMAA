@@ -5,30 +5,37 @@ rho = 0.001818;
 S = 169.0;
 b = 32.17;
 fp_area = 10.79;
-eta_p = 1;
+eta_p = 0.85;
 g = 32.174;
 tc = 0.18;
 AR = b*b/S;
 
-V_knots = linspace(140,280,400);
+V_knots = linspace(140,300.077,400);
 V = V_knots * 1.68781;
 
-CL = (W) ./ (rho .* V.^2 .* S);
+CL = (W) ./ (0.5.*rho .* (V.^2) .* S);% Incorrect Formula for CL
+cl = CL(400);
 
 term1 = 0.55 .* tc .* (CL.^5) ./ (pi .* AR);
 term2 = 0.55 .* tc ./ ( (CL.^2.4) .* pi .* AR );
 e0 = -1+(1 ./ ( 0.618 + term1 + term2 ));
+
 k   = 1 ./ (pi .* AR .* e0);
+K = k(400);
 
 CD0 = 0.055;
 q = 0.5 .* rho .* V.^2;
 
 CDi = (k .* CL.^2);
+cdi = CDi(400);
 D  = (q .* fp_area * CD0) + (q .* S .* CDi);
 
 %Cruise Power
-P_req = D .* V;
+
 P_req = ((q .* V .* S .*CD0) + ((2*W*W)./(rho*pi*AR.*e0*S.*V)));
+P_req = P_req/eta_p
+
+P = P_req(400)/550
 
 P_shaft = 2 * 1250 * 550;
 P_avail = eta_p * P_shaft * ones(size(V));
